@@ -13,5 +13,5 @@
             "type": "image/x-icon"
         }
     ]
-}</content>
-<parameter name="filePath">c:\laragon\www\warung-app\public\manifest.json
+}
+
