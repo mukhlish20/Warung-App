@@ -8,11 +8,17 @@ class PenjagaMiddleware
 {
     public function handle($request, Closure $next)
     {
-        if (!auth()->check() || auth()->user()->role !== 'penjaga') {
-            abort(403);
+        // Jika belum login, redirect ke login
+        if (!auth()->check()) {
+            return redirect()->route('login');
         }
 
-    return $next($request);
+        // Jika bukan penjaga, redirect ke dashboard sesuai role
+        if (auth()->user()->role !== 'penjaga') {
+            return redirect()->route('owner.dashboard');
+        }
+
+        return $next($request);
     }
 
 }

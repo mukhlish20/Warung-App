@@ -8,8 +8,14 @@ class OwnerMiddleware
 {
     public function handle($request, Closure $next)
     {
-        if (!auth()->check() || auth()->user()->role !== 'owner') {
-            abort(403);
+        // Jika belum login, redirect ke login
+        if (!auth()->check()) {
+            return redirect()->route('login');
+        }
+
+        // Jika bukan owner, redirect ke dashboard sesuai role
+        if (auth()->user()->role !== 'owner') {
+            return redirect()->route('penjaga.dashboard');
         }
 
         return $next($request);
