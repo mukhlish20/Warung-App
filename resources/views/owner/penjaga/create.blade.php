@@ -29,7 +29,7 @@
         <select name="warung_id" required>
             @foreach($warungs as $w)
                 <option value="{{ $w->id }}">
-                    {{ $w->nama_warung }}
+                    {{ $w->nama }}
                 </option>
             @endforeach
         </select>

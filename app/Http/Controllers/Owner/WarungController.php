@@ -10,7 +10,7 @@ class WarungController extends Controller
 {
     public function index()
     {
-        $warungs = Warung::orderBy('nama_warung')->get();
+        $warungs = Warung::orderBy('nama')->get();
 
         return view('owner.warung.index', compact('warungs'));
     }
@@ -23,11 +23,14 @@ class WarungController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_warung' => 'required|string|max:100',
+            'nama' => 'required|string|max:100',
         ]);
 
         Warung::create([
-            'nama_warung' => $request->nama_warung,
+            'nama' => $request->nama,
+            'owner_id' => auth()->id(),
+            'persentase_owner' => 50,
+            'persentase_penjaga' => 50,
         ]);
 
         return redirect()
@@ -44,14 +47,14 @@ class WarungController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama_warung' => 'required|max:100',
+            'nama' => 'required|max:100',
             'alamat' => 'nullable|max:255',
             'no_hp' => 'nullable|max:30',
             'catatan' => 'nullable',
         ]);
 
         $warung = Warung::findOrFail($id);
-        $warung->update($request->all());
+        $warung->update($request->only(['nama', 'alamat', 'no_hp', 'catatan']));
 
         return redirect()
             ->route('owner.warung.index')

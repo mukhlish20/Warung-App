@@ -9,8 +9,13 @@ class Warung extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'nama_warung',
+        'nama',
         'alamat',
+        'owner_id',
+        'persentase_owner',
+        'persentase_penjaga',
+        'logo',
+        'deskripsi',
         'no_hp',
         'catatan',
     ];
@@ -18,5 +23,15 @@ class Warung extends Model
     public function omsetHarians()
     {
         return $this->hasMany(OmsetHarian::class);
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
+    }
+
+    public function penjagas()
+    {
+        return $this->hasMany(User::class, 'warung_id');
     }
 }

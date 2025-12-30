@@ -148,7 +148,7 @@
     new Chart(chartCabang, {
         type: 'bar',
         data: {
-            labels: {!! json_encode($cabangs->pluck('nama_warung')) !!},
+            labels: {!! json_encode($cabangs->pluck('nama')) !!},
             datasets: [{
                 label: 'Omset',
                 data: {!! json_encode($cabangs->pluck('total')) !!},

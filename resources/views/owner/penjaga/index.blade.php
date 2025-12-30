@@ -39,7 +39,7 @@
 
                     {{-- CABANG --}}
                     <td>
-                        {{ $p->warung?->nama_warung ?? '-' }}
+                        {{ $p->warung?->nama ?? '-' }}
                     </td>
 
                     {{-- STATUS --}}
@@ -127,7 +127,7 @@
                     📧 {{ $p->email }}
                 </div>
                 <div style="color:#666;font-size:13px;margin-bottom:4px">
-                    🏪 {{ $p->warung?->nama_warung ?? 'Belum ditugaskan' }}
+                    🏪 {{ $p->warung?->nama ?? 'Belum ditugaskan' }}
                 </div>
                 <div style="font-size:13px">
                     @if($p->is_active)

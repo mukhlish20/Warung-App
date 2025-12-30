@@ -72,9 +72,9 @@
         <tr>
             <td>{{ $row->tanggal }}</td>
             <td>{{ number_format($row->omset,0,',','.') }}</td>
-            <td>{{ number_format($row->profit,0,',','.') }}</td>
-            <td>{{ number_format($row->owner_profit,0,',','.') }}</td>
-            <td>{{ number_format($row->penjaga_profit,0,',','.') }}</td>
+            <td>{{ number_format($row->bagian_owner + $row->bagian_penjaga,0,',','.') }}</td>
+            <td>{{ number_format($row->bagian_owner,0,',','.') }}</td>
+            <td>{{ number_format($row->bagian_penjaga,0,',','.') }}</td>
         </tr>
         @endforeach
     </tbody>

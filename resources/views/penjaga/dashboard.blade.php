@@ -83,8 +83,8 @@
                 <tr>
                     <td>{{ $row->tanggal }}</td>
                     <td>{{ rupiahShort($row->omset) }}</td>
-                    <td>{{ rupiahShort($row->profit) }}</td>
-                    <td>{{ rupiahShort($row->penjaga_profit) }}</td>
+                    <td>{{ rupiahShort($row->bagian_owner) }}</td>
+                    <td>{{ rupiahShort($row->bagian_penjaga) }}</td>
                 </tr>
             @empty
                 <tr>
@@ -101,8 +101,8 @@
         <div class="card" style="margin-bottom:12px">
             <div class="card-title">{{ $row->tanggal }}</div>
             <div>Omset: <strong>{{ rupiahShort($row->omset) }}</strong></div>
-            <div>Profit: <strong>{{ rupiahShort($row->profit) }}</strong></div>
-            <div>Bagian Anda: <strong>{{ rupiahShort($row->penjaga_profit) }}</strong></div>
+            <div>Profit: <strong>{{ rupiahShort($row->bagian_owner) }}</strong></div>
+            <div>Bagian Anda: <strong>{{ rupiahShort($row->bagian_penjaga) }}</strong></div>
         </div>
     @empty
         <div class="card">Belum ada data</div>

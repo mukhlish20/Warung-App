@@ -23,23 +23,23 @@ class OmsetController extends Controller
         ]);
 
         $user = auth()->user();
+        $warung = $user->warung;
 
-        // Hitung profit otomatis 10% dari omset, dibagi 50:50
+        // Hitung bagian owner dan penjaga berdasarkan persentase warung
         $omset = $request->omset;
-        $profit = $omset * 0.1; // Profit = 10% dari omset
-        $ownerProfit = $profit * 0.5; // 50% dari profit untuk owner
-        $penjagaProfit = $profit * 0.5; // 50% dari profit untuk penjaga
+        $bagianOwner = $omset * ($warung->persentase_owner / 100);
+        $bagianPenjaga = $omset * ($warung->persentase_penjaga / 100);
 
         OmsetHarian::updateOrCreate(
             [
                 'warung_id' => $user->warung_id,
+                'penjaga_id' => $user->id,
                 'tanggal'  => $request->tanggal,
             ],
             [
                 'omset'          => $omset,
-                'profit'         => $profit,
-                'owner_profit'   => $ownerProfit,
-                'penjaga_profit' => $penjagaProfit,
+                'bagian_owner'   => $bagianOwner,
+                'bagian_penjaga' => $bagianPenjaga,
             ]
         );
 
@@ -48,7 +48,7 @@ class OmsetController extends Controller
             $this->checkOmsetTurun($omset);
         }
 
-        return back()->with('success', 'Omset berhasil disimpan (Profit 10% dibagi 50:50)');
+        return back()->with('success', 'Omset berhasil disimpan');
     }
 
     /**

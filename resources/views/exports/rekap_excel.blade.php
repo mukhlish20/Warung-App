@@ -13,9 +13,9 @@
             <tr>
                 <td>{{ $row->tanggal }}</td>
                 <td>{{ $row->omset }}</td>
-                <td>{{ $row->profit }}</td>
-                <td>{{ $row->owner_profit }}</td>
-                <td>{{ $row->penjaga_profit }}</td>
+                <td>{{ $row->bagian_owner + $row->bagian_penjaga }}</td>
+                <td>{{ $row->bagian_owner }}</td>
+                <td>{{ $row->bagian_penjaga }}</td>
             </tr>
         @endforeach
     </tbody>

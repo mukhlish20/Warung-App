@@ -46,7 +46,7 @@
                 <option value="">Semua Warung</option>
                 @foreach($warungs as $w)
                     <option value="{{ $w->id }}" @selected($warungId == $w->id)>
-                        {{ $w->nama_warung }}
+                        {{ $w->nama }}
                     </option>
                 @endforeach
             </select>
@@ -114,9 +114,9 @@
                 <tr>
                     <td>{{ $row->tanggal }}</td>
                     <td>{{ rupiahShort($row->omset) }}</td>
-                    <td>{{ rupiahShort($row->profit) }}</td>
-                    <td>{{ rupiahShort($row->owner_profit) }}</td>
-                    <td>{{ rupiahShort($row->penjaga_profit) }}</td>
+                    <td>{{ rupiahShort($row->bagian_owner + $row->bagian_penjaga) }}</td>
+                    <td>{{ rupiahShort($row->bagian_owner) }}</td>
+                    <td>{{ rupiahShort($row->bagian_penjaga) }}</td>
                 </tr>
             @empty
                 <tr>
@@ -133,9 +133,9 @@
         <div class="card" style="margin-bottom:12px">
             <div class="card-title">{{ $row->tanggal }}</div>
             <div>Omset: <strong>{{ rupiahShort($row->omset) }}</strong></div>
-            <div>Profit: <strong>{{ rupiahShort($row->profit) }}</strong></div>
-            <div>Owner: <strong>{{ rupiahShort($row->owner_profit) }}</strong></div>
-            <div>Penjaga: <strong>{{ rupiahShort($row->penjaga_profit) }}</strong></div>
+            <div>Profit: <strong>{{ rupiahShort($row->bagian_owner + $row->bagian_penjaga) }}</strong></div>
+            <div>Owner: <strong>{{ rupiahShort($row->bagian_owner) }}</strong></div>
+            <div>Penjaga: <strong>{{ rupiahShort($row->bagian_penjaga) }}</strong></div>
         </div>
     @empty
         <div class="card">Belum ada data</div>

@@ -29,9 +29,9 @@ class RekapController extends Controller
 
         $summary = [
             'omset'   => $data->sum('omset'),
-            'profit'  => $data->sum('profit'),
-            'owner'   => $data->sum('owner_profit'),
-            'penjaga' => $data->sum('penjaga_profit'),
+            'profit'  => $data->sum('bagian_owner'),
+            'owner'   => $data->sum('bagian_owner'),
+            'penjaga' => $data->sum('bagian_penjaga'),
         ];
 
         $warungs = Warung::all();
@@ -71,9 +71,9 @@ class RekapController extends Controller
 
         $summary = [
             'omset'   => $data->sum('omset'),
-            'profit'  => $data->sum('profit'),
-            'owner'   => $data->sum('owner_profit'),
-            'penjaga' => $data->sum('penjaga_profit'),
+            'profit'  => $data->sum('bagian_owner'),
+            'owner'   => $data->sum('bagian_owner'),
+            'penjaga' => $data->sum('bagian_penjaga'),
         ];
 
         return Pdf::loadView('exports.rekap_pdf', compact(

@@ -39,27 +39,36 @@ class DummyDataSeeder extends Seeder
 
         $warungs = [
             [
-                'nama_warung' => 'Warung Maju Jaya - Cabang Pusat',
+                'nama' => 'Warung Maju Jaya - Cabang Pusat',
                 'alamat' => 'Jl. Sudirman No. 123, Jakarta Pusat',
+                'owner_id' => $owner->id,
+                'persentase_owner' => 50,
+                'persentase_penjaga' => 50,
             ],
             [
-                'nama_warung' => 'Warung Maju Jaya - Cabang Timur',
+                'nama' => 'Warung Maju Jaya - Cabang Timur',
                 'alamat' => 'Jl. Ahmad Yani No. 45, Jakarta Timur',
+                'owner_id' => $owner->id,
+                'persentase_owner' => 50,
+                'persentase_penjaga' => 50,
             ],
             [
-                'nama_warung' => 'Warung Maju Jaya - Cabang Selatan',
+                'nama' => 'Warung Maju Jaya - Cabang Selatan',
                 'alamat' => 'Jl. Fatmawati No. 78, Jakarta Selatan',
+                'owner_id' => $owner->id,
+                'persentase_owner' => 50,
+                'persentase_penjaga' => 50,
             ],
         ];
 
         $warungModels = [];
         foreach ($warungs as $warungData) {
             $warung = Warung::firstOrCreate(
-                ['nama_warung' => $warungData['nama_warung']],
+                ['nama' => $warungData['nama']],
                 $warungData
             );
             $warungModels[] = $warung;
-            $this->command->info("✅ Warung: {$warung->nama_warung}");
+            $this->command->info("✅ Warung: {$warung->nama}");
         }
 
         // 3. BUAT PENJAGA (1 per warung) - atau ambil yang sudah ada
@@ -80,7 +89,7 @@ class DummyDataSeeder extends Seeder
                 ]
             );
 
-            $this->command->info("✅ Penjaga: {$penjaga->email} / password (Warung: {$warung->nama_warung})");
+            $this->command->info("✅ Penjaga: {$penjaga->email} / password (Warung: {$warung->nama})");
         }
 
         // 4. BUAT OMSET HARIAN (30 HARI TERAKHIR)
@@ -136,22 +145,25 @@ class DummyDataSeeder extends Seeder
                 $omset = $baseOmset * 0.6; // Turun 40%
             }
 
-            // Hitung profit (10% dari omset, dibagi 50:50)
+            // Hitung profit (10% dari omset, dibagi sesuai persentase warung)
             $profit = $omset * 0.1;
-            $ownerProfit = $profit * 0.5;
-            $penjagaProfit = $profit * 0.5;
+            $bagianOwner = $profit * ($warung->persentase_owner / 100);
+            $bagianPenjaga = $profit * ($warung->persentase_penjaga / 100);
+
+            // Ambil penjaga yang ditugaskan di warung ini
+            $penjaga = User::where('warung_id', $warung->id)->where('role', 'penjaga')->first();
 
             OmsetHarian::create([
                 'warung_id' => $warung->id,
+                'penjaga_id' => $penjaga?->id,
                 'tanggal' => $tanggal->toDateString(),
                 'omset' => $omset,
-                'profit' => $profit,
-                'owner_profit' => $ownerProfit,
-                'penjaga_profit' => $penjagaProfit,
+                'bagian_owner' => $bagianOwner,
+                'bagian_penjaga' => $bagianPenjaga,
             ]);
         }
 
-        $this->command->info("✅ Omset created for: {$warung->nama_warung} (30 hari)");
+        $this->command->info("✅ Omset created for: {$warung->nama} (30 hari)");
     }
 
     /**

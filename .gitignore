@@ -22,3 +22,11 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# SQL files (temporary database fixes)
+fix_*.sql
+database_setup.sql
+
+# Temporary files
+UPLOAD_GUIDE.md
+*.zip

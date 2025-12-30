@@ -32,7 +32,7 @@
                 <tr>
                     <td>{{ $index + 1 }}</td>
                     <td>
-                        <strong>{{ $warung->nama_warung }}</strong><br>
+                        <strong>{{ $warung->nama }}</strong><br>
                         <small style="color:#999">
                             {{ $warung->alamat ?? '-' }}
                         </small>
@@ -76,7 +76,7 @@
         <div class="card" style="margin-bottom:12px">
             <div style="margin-bottom:12px">
                 <div style="font-weight:600;font-size:16px;margin-bottom:4px">
-                    {{ $warung->nama_warung }}
+                    {{ $warung->nama }}
                 </div>
                 <div style="color:#999;font-size:13px">
                     {{ $warung->alamat ?? '-' }}

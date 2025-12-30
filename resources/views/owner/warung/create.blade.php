@@ -18,7 +18,7 @@
         <div class="card-title">Nama Warung</div>
         <input
             type="text"
-            name="nama_warung"
+            name="nama"
             required
             placeholder="Contoh: Warung Cabang Sudirman"
             style="width:100%;padding:10px;border-radius:8px;border:1px solid #ddd"

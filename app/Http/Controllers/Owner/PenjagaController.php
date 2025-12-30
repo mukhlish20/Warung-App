@@ -26,7 +26,7 @@ class PenjagaController extends Controller
     {
         abort_if($user->role !== 'penjaga', 403);
 
-        $warungs = Warung::orderBy('nama_warung')->get();
+        $warungs = Warung::orderBy('nama')->get();
 
         return view('owner.penjaga.edit', compact('user', 'warungs'));
     }
@@ -55,7 +55,7 @@ class PenjagaController extends Controller
 
     public function create()
     {
-        $warungs = Warung::orderBy('nama_warung')->get();
+        $warungs = Warung::orderBy('nama')->get();
         return view('owner.penjaga.create', compact('warungs'));
     }
 

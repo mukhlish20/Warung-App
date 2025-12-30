@@ -6,10 +6,19 @@ Aplikasi web untuk mengelola omset harian warung dengan fitur pembagian profit o
 ![PHP](https://img.shields.io/badge/PHP-8.2+-blue?style=flat-square&logo=php)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
+## 🌐 Live Demo
+
+**🚀 [https://warungmadura-app.infinityfreeapp.com](https://warungmadura-app.infinityfreeapp.com)**
+
+**Login Credentials:**
+- **Owner:** `owner@warung.com` / `password`
+- **Penjaga:** `penjaga1@warung.com` / `password`
+
 ---
 
 ## 📋 Daftar Isi
 
+- [Live Demo](#-live-demo)
 - [Fitur Utama](#-fitur-utama)
 - [Tech Stack](#-tech-stack)
 - [Persyaratan Sistem](#-persyaratan-sistem)
@@ -17,6 +26,7 @@ Aplikasi web untuk mengelola omset harian warung dengan fitur pembagian profit o
 - [Konfigurasi](#-konfigurasi)
 - [Penggunaan](#-penggunaan)
 - [Fitur WhatsApp Alert](#-fitur-whatsapp-alert)
+- [Deployment](#-deployment)
 - [Kontribusi](#-kontribusi)
 - [Lisensi](#-lisensi)
 
@@ -348,16 +358,34 @@ php artisan db:seed --class=DummyDataSeeder
 
 ## 🚀 Deployment
 
+### Live Demo
+
+Aplikasi ini sudah di-deploy di **InfinityFree** (Free Hosting):
+
+**🌐 URL:** [https://warungmadura-app.infinityfreeapp.com](https://warungmadura-app.infinityfreeapp.com)
+
+**Login Credentials:**
+- **Owner:** `owner@warung.com` / `password`
+- **Penjaga:** `penjaga1@warung.com` / `password`
+
+**Fitur yang Aktif:**
+- ✅ Dashboard Owner & Penjaga
+- ✅ Kelola Warung & Penjaga
+- ✅ Input Omset Harian
+- ✅ Laporan & Export (Excel/PDF)
+- ✅ Grafik Interaktif (Chart.js)
+- ⚠️ WhatsApp Alert (Disabled - API berbayar)
+
 ### Production Checklist
 
-- [ ] Set `APP_ENV=production` di `.env`
-- [ ] Set `APP_DEBUG=false` di `.env`
-- [ ] Generate production key: `php artisan key:generate`
-- [ ] Optimize autoloader: `composer install --optimize-autoloader --no-dev`
-- [ ] Cache config: `php artisan config:cache`
-- [ ] Cache routes: `php artisan route:cache`
-- [ ] Cache views: `php artisan view:cache`
-- [ ] Setup SSL/HTTPS
+- [x] Set `APP_ENV=production` di `.env`
+- [x] Set `APP_DEBUG=false` di `.env`
+- [x] Generate production key: `php artisan key:generate`
+- [x] Optimize autoloader: `composer install --optimize-autoloader --no-dev`
+- [x] Cache config: `php artisan config:cache`
+- [x] Cache routes: `php artisan route:cache`
+- [x] Cache views: `php artisan view:cache`
+- [x] Setup SSL/HTTPS (InfinityFree auto SSL)
 - [ ] Setup backup database otomatis
 - [ ] Setup monitoring & logging
 

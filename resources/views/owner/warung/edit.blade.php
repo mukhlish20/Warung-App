@@ -15,8 +15,8 @@
         <div style="margin-bottom:14px">
             <label>Nama Warung</label>
             <input type="text"
-                   name="nama_warung"
-                   value="{{ old('nama_warung', $warung->nama_warung) }}"
+                   name="nama"
+                   value="{{ old('nama', $warung->nama) }}"
                    required
                    style="width:100%">
         </div>

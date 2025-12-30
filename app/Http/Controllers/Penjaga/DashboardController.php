@@ -21,8 +21,8 @@ class DashboardController extends Controller
 
         $summary = [
             'omset'   => $data->sum('omset'),
-            'profit'  => $data->sum('profit'),
-            'penjaga' => $data->sum('penjaga_profit'),
+            'profit'  => $data->sum('bagian_owner'),
+            'penjaga' => $data->sum('bagian_penjaga'),
         ];
 
         return view('penjaga.dashboard', compact(

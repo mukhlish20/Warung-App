@@ -8,15 +8,21 @@ class OmsetHarian extends Model
 {
     protected $fillable = [
         'warung_id',
+        'penjaga_id',
         'tanggal',
         'omset',
-        'profit',
-        'owner_profit',
-        'penjaga_profit',
+        'bagian_owner',
+        'bagian_penjaga',
+        'catatan',
     ];
 
     public function warung()
     {
         return $this->belongsTo(Warung::class);
+    }
+
+    public function penjaga()
+    {
+        return $this->belongsTo(User::class, 'penjaga_id');
     }
 }
