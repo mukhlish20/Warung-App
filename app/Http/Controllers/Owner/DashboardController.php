@@ -29,7 +29,7 @@ class DashboardController extends Controller
 
         $profitBulan = OmsetHarian::whereMonth('tanggal', $bulan)
             ->whereYear('tanggal', $tahun)
-            ->sum('bagian_owner');
+            ->sum('owner_profit');
 
         $jumlahWarung = Warung::count();
 
@@ -38,11 +38,11 @@ class DashboardController extends Controller
         // ======================
         $profitOwner = OmsetHarian::whereMonth('tanggal', $bulan)
             ->whereYear('tanggal', $tahun)
-            ->sum('bagian_owner');
+            ->sum('owner_profit');
 
         $profitPenjaga = OmsetHarian::whereMonth('tanggal', $bulan)
             ->whereYear('tanggal', $tahun)
-            ->sum('bagian_penjaga');
+            ->sum('penjaga_profit');
 
         // ======================
         // OMSET PER CABANG

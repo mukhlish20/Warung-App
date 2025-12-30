@@ -155,11 +155,10 @@ class DummyDataSeeder extends Seeder
 
             OmsetHarian::create([
                 'warung_id' => $warung->id,
-                'penjaga_id' => $penjaga?->id,
                 'tanggal' => $tanggal->toDateString(),
                 'omset' => $omset,
-                'bagian_owner' => $bagianOwner,
-                'bagian_penjaga' => $bagianPenjaga,
+                'owner_profit' => $bagianOwner,
+                'penjaga_profit' => $bagianPenjaga,
             ]);
         }
 
