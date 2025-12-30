@@ -28,5 +28,4 @@ fix_*.sql
 database_setup.sql
 
 # Temporary files
-UPLOAD_GUIDE.md
 *.zip

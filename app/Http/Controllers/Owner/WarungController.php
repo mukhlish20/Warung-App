@@ -23,14 +23,20 @@ class WarungController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|string|max:100',
+            'nama' => 'required|string|max:100|unique:warungs,nama',
+            'alamat' => 'nullable|string|max:255',
+            'no_hp' => 'nullable|string|max:30|regex:/^(\+62|62|0)[0-9]{7,15}$/',
+            'catatan' => 'nullable|string|max:500',
         ]);
 
         Warung::create([
             'nama' => $request->nama,
+            'alamat' => $request->alamat,
             'owner_id' => auth()->id(),
             'persentase_owner' => 50,
             'persentase_penjaga' => 50,
+            'no_hp' => $request->no_hp,
+            'catatan' => $request->catatan,
         ]);
 
         return redirect()
@@ -47,10 +53,10 @@ class WarungController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama' => 'required|max:100',
-            'alamat' => 'nullable|max:255',
-            'no_hp' => 'nullable|max:30',
-            'catatan' => 'nullable',
+            'nama' => 'required|string|max:100|unique:warungs,nama,' . $id,
+            'alamat' => 'nullable|string|max:255',
+            'no_hp' => 'nullable|string|max:30|regex:/^(\+62|62|0)[0-9]{7,15}$/',
+            'catatan' => 'nullable|string|max:500',
         ]);
 
         $warung = Warung::findOrFail($id);

@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Warung App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#7367f0">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/x-icon" href="/build/favicon.ico">
 
     <style>
         /* =====================

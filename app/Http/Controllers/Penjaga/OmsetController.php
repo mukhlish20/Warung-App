@@ -18,15 +18,32 @@ class OmsetController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tanggal' => 'required|date',
-            'omset'   => 'required|numeric|min:0',
+            'tanggal' => 'required|date|before_or_equal:today|after:2020-01-01',
+            'omset'   => 'required|numeric|min:0|max:999999999',
         ]);
 
         $user = auth()->user();
         $warung = $user->warung;
 
+        if (!$warung) {
+            abort(403, 'Anda belum di-assign ke cabang warung.');
+        }
+
+        // Sanitize input
+        $tanggal = $request->tanggal;
+        $omset = (float) $request->omset;
+
+        // Cek duplikasi tanggal untuk penjaga yang sama
+        $existing = OmsetHarian::where('warung_id', $user->warung_id)
+            ->where('penjaga_id', $user->id)
+            ->where('tanggal', $tanggal)
+            ->exists();
+
+        if ($existing) {
+            return back()->withErrors(['tanggal' => 'Data omset untuk tanggal ini sudah ada.']);
+        }
+
         // Hitung bagian owner dan penjaga berdasarkan persentase warung
-        $omset = $request->omset;
         $bagianOwner = $omset * ($warung->persentase_owner / 100);
         $bagianPenjaga = $omset * ($warung->persentase_penjaga / 100);
 

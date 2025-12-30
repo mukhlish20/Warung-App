@@ -1,36 +1,50 @@
-# 🏪 Warung App - Sistem Manajemen Omset Warung
+# 🏪 Warung App
 
-Aplikasi web untuk mengelola omset harian warung dengan fitur pembagian profit otomatis dan notifikasi WhatsApp ketika omset turun.
+Aplikasi web untuk mengelola omset harian warung dengan fitur pembagian profit otomatis dan notifikasi WhatsApp.
 
-![Laravel](https://img.shields.io/badge/Laravel-12.x-red?style=flat-square&logo=laravel)
-![PHP](https://img.shields.io/badge/PHP-8.2+-blue?style=flat-square&logo=php)
-![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+## 🚀 Quick Start
 
-## 🌐 Live Demo
+1. **Clone & Install**
+   ```bash
+   git clone <repo>
+   cd warung-app
+   composer install
+   npm install && npm run build
+   ```
 
-**🚀 [https://warungmadura-app.infinityfreeapp.com](https://warungmadura-app.infinityfreeapp.com)**
+2. **Environment Setup**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   # Configure database in .env
+   php artisan migrate --seed
+   ```
 
-**Login Credentials:**
-- **Owner:** `owner@warung.com` / `password`
-- **Penjaga:** `penjaga1@warung.com` / `password`
+3. **WhatsApp Setup**
+   - Daftar di [Fonnte.com](https://fonnte.com)
+   - Set `WHATSAPP_API_KEY` dan `WHATSAPP_PHONE_NUMBER` di `.env`
 
----
+4. **Run**
+   ```bash
+   php artisan serve
+   ```
 
-## 📋 Daftar Isi
+## 🔐 Security Features
 
-- [Live Demo](#-live-demo)
-- [Fitur Utama](#-fitur-utama)
-- [Tech Stack](#-tech-stack)
-- [Persyaratan Sistem](#-persyaratan-sistem)
-- [Instalasi](#-instalasi)
-- [Konfigurasi](#-konfigurasi)
-- [Penggunaan](#-penggunaan)
-- [Fitur WhatsApp Alert](#-fitur-whatsapp-alert)
-- [Deployment](#-deployment)
-- [Kontribusi](#-kontribusi)
-- [Lisensi](#-lisensi)
+- Rate limiting (5 attempts/minute)
+- Secure headers (CSP, HSTS, X-Frame-Options)
+- CSRF protection
+- Input validation & sanitization
+- SQL injection prevention
+- XSS protection
 
----
+## 📱 PWA Ready
+
+Aplikasi ini siap untuk PWA Android dengan manifest.json dan service worker.
+
+## 📄 License
+
+MIT License
 
 ## ✨ Fitur Utama
 
@@ -200,7 +214,61 @@ Lihat panduan lengkap: [SETUP_WHATSAPP_MUDAH.md](SETUP_WHATSAPP_MUDAH.md)
 
 ---
 
-## 📖 Penggunaan
+## � Keamanan & Best Practices
+
+### Security Features Implemented
+
+- ✅ **Rate Limiting**: Login attempts dibatasi (5x per menit)
+- ✅ **Secure Headers**: CSP, HSTS, X-Frame-Options, dll
+- ✅ **Input Validation**: Validasi ketat di semua form
+- ✅ **CSRF Protection**: Token CSRF aktif di semua form
+- ✅ **SQL Injection Prevention**: Menggunakan Eloquent ORM
+- ✅ **XSS Protection**: Output escaping dan CSP
+- ✅ **Authentication Logging**: Semua login attempt dicatat
+- ✅ **Password Hashing**: Bcrypt dengan cost 12
+- ✅ **Session Security**: Secure session management
+- ✅ **API Key Security**: WhatsApp API menggunakan Bearer token
+
+### Production Security Checklist
+
+Sebelum deploy ke production:
+
+1. **Environment Variables**:
+   ```bash
+   APP_ENV=production
+   APP_DEBUG=false
+   APP_KEY=generate_new_key
+   ```
+
+2. **Database Security**:
+   ```env
+   DB_PASSWORD=strong_password_here
+   ```
+
+3. **WhatsApp API Security**:
+   ```env
+   WHATSAPP_API_KEY=secure_random_key
+   ```
+
+4. **File Permissions**:
+   ```bash
+   chmod 755 storage/
+   chmod 755 bootstrap/cache/
+   ```
+
+5. **SSL Certificate**: Pastikan menggunakan HTTPS
+
+6. **Regular Updates**: Update dependencies secara berkala
+
+### Security Monitoring
+
+- Login attempts logged di `storage/logs/laravel.log`
+- Failed login akan tercatat sebagai WARNING
+- Successful login tercatat sebagai INFO
+
+---
+
+## �📖 Penggunaan
 
 ### Login Credentials (Setelah Seeding)
 

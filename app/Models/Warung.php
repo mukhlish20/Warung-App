@@ -14,7 +14,6 @@ class Warung extends Model
         'owner_id',
         'persentase_owner',
         'persentase_penjaga',
-        'logo',
         'deskripsi',
         'no_hp',
         'catatan',
