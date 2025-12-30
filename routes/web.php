@@ -13,9 +13,19 @@ use App\Http\Controllers\Owner\PenjagaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Owner\WhatsAppSettingController;
 
-/*route welcome*/
+/*route welcome - redirect to login or dashboard based on auth*/
 Route::get('/', function () {
-    return view('welcome');
+    if (auth()->check()) {
+        // Jika sudah login, redirect ke dashboard sesuai role
+        if (auth()->user()->role === 'owner') {
+            return redirect()->route('owner.dashboard');
+        } else {
+            return redirect()->route('penjaga.dashboard');
+        }
+    }
+
+    // Jika belum login, redirect ke halaman login
+    return redirect()->route('login');
 });
 
 /*route login & logout*/

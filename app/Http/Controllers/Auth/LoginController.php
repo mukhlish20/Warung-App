@@ -14,6 +14,14 @@ class LoginController extends Controller
     /*Tampilkan form login*/
     public function form()
     {
+        // Jika sudah login, redirect ke dashboard sesuai role
+        if (Auth::check()) {
+            $user = Auth::user();
+            return $user->role === 'owner'
+                ? redirect()->route('owner.dashboard')
+                : redirect()->route('penjaga.dashboard');
+        }
+
         return view('auth.login');
     }
 
